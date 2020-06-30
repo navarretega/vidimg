@@ -8,6 +8,8 @@ function createWindow() {
     height: 600,
     minWidth: 400,
     minHeight: 500,
+    maxHeight: 900,
+    maxWidth: 800,
     frame: false,
     icon: `${__dirname}/app/assets/icon-192x192.png`,
     webPreferences: {

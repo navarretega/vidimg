@@ -10,26 +10,79 @@
 }
 
 @font-face {
+  font-family: "Poppins Extra Light";
+  src: url("../fonts/Poppins-ExtraLight.ttf");
+}
+
+@font-face {
   font-family: "Poppins Medium";
   src: url("../fonts/Poppins-Medium.ttf");
 }
 
-@font-face {
-  font-family: "Poppins Bold";
-  src: url("../fonts/Poppins-Bold.ttf");
-}
-
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: "Poppins Medium", sans-serif;
   background: #1a2933;
   color: #fff;
 }
 
-h1 {
-  font-size: 2rem;
+.tl-tabs {
+  display: flex;
+  justify-content: space-evenly;
 }
 
-p {
-  margin-top: 1rem;
-  font-size: 0.8rem;
+.tl-tabs h3 {
+  cursor: pointer;
+}
+
+.tl-tabs h3:not(.tl-active) {
+  opacity: 50%;
+}
+
+.tl-tabs h3:hover:not(.tl-active) {
+  border-bottom: 2px solid #988b8e;
+}
+
+.tl-active {
+  border-bottom: 2px solid #eff8e2;
+}
+
+.container {
+  font-family: "Poppins", sans-serif;
+  margin-top: 50px;
+}
+
+.f {
+  margin-bottom: 40px;
+}
+
+.label.custom {
+  color: #fff;
+}
+
+.input {
+  background-color: transparent;
+  border: 1px solid #eff8e2;
+}
+
+.input::placeholder {
+  color: #eff8e2;
+  opacity: 50%;
+}
+
+.help,
+.file-name {
+  color: #eff8e2;
+}
+
+.file-name {
+  border-color: #eff8e2;
+  opacity: 50%;
+}
+
+.file-cta {
+  background-color: #eff8e2;
+}
+
+#submit-btn {
+  background-color: #eff8e2;
 }

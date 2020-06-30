@@ -13,23 +13,29 @@ window.onbeforeunload = (event) => {
 };
 
 function handleWindowControls() {
-  document.getElementById("min-button").addEventListener("click", (event) => {
-    win.minimize();
-  });
-
-  document.getElementById("max-button").addEventListener("click", (event) => {
-    win.maximize();
-  });
+  document
+    .getElementById("tl-min-button")
+    .addEventListener("click", (event) => {
+      win.minimize();
+    });
 
   document
-    .getElementById("restore-button")
+    .getElementById("tl-max-button")
+    .addEventListener("click", (event) => {
+      win.maximize();
+    });
+
+  document
+    .getElementById("tl-restore-button")
     .addEventListener("click", (event) => {
       win.unmaximize();
     });
 
-  document.getElementById("close-button").addEventListener("click", (event) => {
-    win.close();
-  });
+  document
+    .getElementById("tl-close-button")
+    .addEventListener("click", (event) => {
+      win.close();
+    });
 
   toggleMaxRestoreButtons();
   win.on("maximize", toggleMaxRestoreButtons);
@@ -37,9 +43,9 @@ function handleWindowControls() {
 
   function toggleMaxRestoreButtons() {
     if (win.isMaximized()) {
-      document.body.classList.add("maximized");
+      document.body.classList.add("tl-maximized");
     } else {
-      document.body.classList.remove("maximized");
+      document.body.classList.remove("tl-maximized");
     }
   }
 }
@@ -47,4 +53,4 @@ function handleWindowControls() {
 // Custom Scrollbar
 // To get rid of it, simply remove the next line,
 // and remove the css (simplebar.css) and js (simblebar.min.js)
-new SimpleBar(document.getElementById("main"));
+new SimpleBar(document.getElementById("tl-main"));
