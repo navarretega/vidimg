@@ -1,11 +1,11 @@
-const { app, BrowserWindow } = require("electron");
+const { app, shell, BrowserWindow } = require("electron");
 
 let mainWindow;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 500,
-    height: 600,
+    height: 750,
     minWidth: 400,
     minHeight: 500,
     maxHeight: 900,
@@ -19,6 +19,11 @@ function createWindow() {
   });
 
   mainWindow.loadFile(`${__dirname}/app/index.html`);
+
+  mainWindow.webContents.on("new-window", function (event, url) {
+    event.preventDefault();
+    shell.openExternal(url);
+  });
 
   // mainWindow.webContents.openDevTools();
 

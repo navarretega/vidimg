@@ -3,7 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' 'unsafe-inline'"
+    />
     <link rel="stylesheet" href="css/bulma.min.css" />
     <link rel="stylesheet" href="css/all.min.css" />
     <link rel="stylesheet" href="css/simplebar.css" />
@@ -99,12 +102,32 @@
       </div>
 
       <div class="container">
-        <form action="">
+        <!-- Loading -->
+        <div id="spinner-container" class="toggle-content">
+          <div class="spinner">
+            <div class="rect1"></div>
+            <div class="rect2"></div>
+            <div class="rect3"></div>
+            <div class="rect4"></div>
+            <div class="rect5"></div>
+          </div>
+          <p class="loading-path"></p>
+        </div>
+        <!-- Loading -->
+
+        <form action="" id="vidimg-form" class="toggle-content is-visible">
           <div class="f">
             <label class="label custom">1. Start by choosing a video.</label>
             <div class="file has-name">
               <label class="file-label">
-                <input class="file-input" type="file" name="resume" />
+                <input
+                  class="file-input"
+                  type="file"
+                  name="resume"
+                  id="video"
+                  accept="video/*"
+                  required
+                />
                 <span class="file-cta">
                   <span class="file-icon">
                     <i class="fas fa-upload"></i>
@@ -113,8 +136,8 @@
                     Choose
                   </span>
                 </span>
-                <span class="file-name">
-                  Screen Shot 2017-07-29 at 15.54.25.png
+                <span id="video-name" class="file-name">
+                  my-video.mp4
                 </span>
               </label>
             </div>
@@ -126,11 +149,25 @@
             >
             <div class="columns is-mobile">
               <div class="column is-two-fifths">
-                <input class="input" type="text" placeholder="00:00:00" />
+                <input
+                  class="input"
+                  type="text"
+                  placeholder="00:00:00"
+                  id="start-time"
+                  pattern="^(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)$"
+                  required
+                />
                 <p class="help">HH:MM:SS</p>
               </div>
               <div class="column is-two-fifths">
-                <input class="input" type="text" placeholder="01:10:05" />
+                <input
+                  class="input"
+                  type="text"
+                  placeholder="01:10:05"
+                  id="end-time"
+                  pattern="^(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)$"
+                  required
+                />
                 <p class="help">HH:MM:SS</p>
               </div>
             </div>
@@ -138,21 +175,47 @@
 
           <div class="f">
             <label class="label custom"
-              >3. Finally, choose the final dimensions.</label
+              >3. Choose the desired dimensions.</label
             >
             <div class="columns is-mobile">
               <div class="column is-two-fifths">
-                <input class="input" type="text" placeholder="600" />
+                <input
+                  class="input"
+                  type="text"
+                  placeholder="600"
+                  id="width"
+                  pattern="^[0-9]+$"
+                  required
+                />
                 <p class="help">WIDTH (px)</p>
               </div>
               <div class="column is-two-fifths">
-                <input class="input" type="text" placeholder="400" />
+                <input
+                  class="input"
+                  type="text"
+                  placeholder="400"
+                  id="height"
+                  pattern="^[0-9]+$"
+                  required
+                />
                 <p class="help">HEIGHT (px)</p>
               </div>
             </div>
           </div>
 
-          <button id="submit-btn" class="button is-fullwidth">
+          <div class="f">
+            <label class="label custom">4. Finally, set the frame rate.</label>
+            <input
+              class="input"
+              type="text"
+              placeholder="25"
+              id="fps"
+              required
+            />
+            <p class="help">FPS</p>
+          </div>
+
+          <button id="submit-btn" class="button is-fullwidth" type="submit">
             <span class="icon">
               <i class="far fa-arrow-alt-circle-right"></i>
             </span>
@@ -164,5 +227,6 @@
 
     <script src="js/simplebar.min.js"></script>
     <script src="js/titlebar.js"></script>
+    <script src="js/renderer.js"></script>
   </body>
 </html>
