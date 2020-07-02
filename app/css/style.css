@@ -36,14 +36,35 @@ body {
 
 .tl-tabs h3:not(.tl-active) {
   opacity: 50%;
+  transition: opacity 0.6s;
 }
 
 .tl-tabs h3:hover:not(.tl-active) {
   border-bottom: 2px solid #988b8e;
+  transition: border-bottom 0.1s;
 }
 
 .tl-active {
   border-bottom: 2px solid #eff8e2;
+  transition: border-bottom 0.1s;
+}
+
+.tabcontent {
+  animation: fadeEffect 0.6s;
+}
+
+.tabcontent:not(.active) {
+  display: none;
+}
+
+/* Fade in tabs */
+@keyframes fadeEffect {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .container {

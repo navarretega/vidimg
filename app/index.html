@@ -97,131 +97,139 @@
 
     <div id="tl-main">
       <div class="tl-tabs">
-        <h3 class="tl-active">Videos</h3>
-        <h3 class="">Images</h3>
+        <h3 id="video-tab" class="tl-tablinks tl-active">Videos</h3>
+        <h3 id="image-tab" class="tl-tablinks">Images</h3>
       </div>
 
       <div class="container">
-        <!-- Loading -->
-        <div id="spinner-container" class="toggle-content">
-          <div class="spinner">
-            <div class="rect1"></div>
-            <div class="rect2"></div>
-            <div class="rect3"></div>
-            <div class="rect4"></div>
-            <div class="rect5"></div>
+        <div id="video-content" class="tabcontent active">
+          <!-- Loading -->
+          <div id="spinner-container" class="toggle-content">
+            <div class="spinner">
+              <div class="rect1"></div>
+              <div class="rect2"></div>
+              <div class="rect3"></div>
+              <div class="rect4"></div>
+              <div class="rect5"></div>
+            </div>
+            <p class="loading-path"></p>
           </div>
-          <p class="loading-path"></p>
+          <!-- Loading -->
+
+          <form action="" id="vidimg-form" class="toggle-content is-visible">
+            <div class="f">
+              <label class="label custom">1. Start by choosing a video.</label>
+              <div class="file has-name">
+                <label class="file-label">
+                  <input
+                    class="file-input"
+                    type="file"
+                    name="resume"
+                    id="video"
+                    accept="video/*"
+                    required
+                  />
+                  <span class="file-cta">
+                    <span class="file-icon">
+                      <i class="fas fa-upload"></i>
+                    </span>
+                    <span class="file-label">
+                      Choose
+                    </span>
+                  </span>
+                  <span id="video-name" class="file-name">
+                    my-video.mp4
+                  </span>
+                </label>
+              </div>
+            </div>
+
+            <div class="f">
+              <label class="label custom"
+                >2. Now, select a start time & end time.</label
+              >
+              <div class="columns is-mobile">
+                <div class="column is-two-fifths">
+                  <input
+                    class="input"
+                    type="text"
+                    placeholder="00:00:00"
+                    id="start-time"
+                    pattern="^(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)$"
+                    required
+                  />
+                  <p class="help">HH:MM:SS</p>
+                </div>
+                <div class="column is-two-fifths">
+                  <input
+                    class="input"
+                    type="text"
+                    placeholder="01:10:05"
+                    id="end-time"
+                    pattern="^(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)$"
+                    required
+                  />
+                  <p class="help">HH:MM:SS</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="f">
+              <label class="label custom"
+                >3. Choose the desired dimensions.</label
+              >
+              <div class="columns is-mobile">
+                <div class="column is-two-fifths">
+                  <input
+                    class="input"
+                    type="text"
+                    placeholder="600"
+                    id="width"
+                    pattern="^[0-9]+$"
+                    required
+                  />
+                  <p class="help">WIDTH (px)</p>
+                </div>
+                <div class="column is-two-fifths">
+                  <input
+                    class="input"
+                    type="text"
+                    placeholder="400"
+                    id="height"
+                    pattern="^[0-9]+$"
+                    required
+                  />
+                  <p class="help">HEIGHT (px)</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="f">
+              <label class="label custom"
+                >4. Finally, set the frame rate.</label
+              >
+              <input
+                class="input"
+                type="text"
+                placeholder="25"
+                id="fps"
+                required
+              />
+              <p class="help">FPS</p>
+            </div>
+
+            <button id="submit-btn" class="button is-fullwidth" type="submit">
+              <span class="icon">
+                <i class="far fa-arrow-alt-circle-right"></i>
+              </span>
+              <span>CONVERT</span>
+            </button>
+          </form>
         </div>
-        <!-- Loading -->
 
-        <form action="" id="vidimg-form" class="toggle-content is-visible">
-          <div class="f">
-            <label class="label custom">1. Start by choosing a video.</label>
-            <div class="file has-name">
-              <label class="file-label">
-                <input
-                  class="file-input"
-                  type="file"
-                  name="resume"
-                  id="video"
-                  accept="video/*"
-                  required
-                />
-                <span class="file-cta">
-                  <span class="file-icon">
-                    <i class="fas fa-upload"></i>
-                  </span>
-                  <span class="file-label">
-                    Choose
-                  </span>
-                </span>
-                <span id="video-name" class="file-name">
-                  my-video.mp4
-                </span>
-              </label>
-            </div>
-          </div>
-
-          <div class="f">
-            <label class="label custom"
-              >2. Now, select a start time & end time.</label
-            >
-            <div class="columns is-mobile">
-              <div class="column is-two-fifths">
-                <input
-                  class="input"
-                  type="text"
-                  placeholder="00:00:00"
-                  id="start-time"
-                  pattern="^(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)$"
-                  required
-                />
-                <p class="help">HH:MM:SS</p>
-              </div>
-              <div class="column is-two-fifths">
-                <input
-                  class="input"
-                  type="text"
-                  placeholder="01:10:05"
-                  id="end-time"
-                  pattern="^(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)$"
-                  required
-                />
-                <p class="help">HH:MM:SS</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="f">
-            <label class="label custom"
-              >3. Choose the desired dimensions.</label
-            >
-            <div class="columns is-mobile">
-              <div class="column is-two-fifths">
-                <input
-                  class="input"
-                  type="text"
-                  placeholder="600"
-                  id="width"
-                  pattern="^[0-9]+$"
-                  required
-                />
-                <p class="help">WIDTH (px)</p>
-              </div>
-              <div class="column is-two-fifths">
-                <input
-                  class="input"
-                  type="text"
-                  placeholder="400"
-                  id="height"
-                  pattern="^[0-9]+$"
-                  required
-                />
-                <p class="help">HEIGHT (px)</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="f">
-            <label class="label custom">4. Finally, set the frame rate.</label>
-            <input
-              class="input"
-              type="text"
-              placeholder="25"
-              id="fps"
-              required
-            />
-            <p class="help">FPS</p>
-          </div>
-
-          <button id="submit-btn" class="button is-fullwidth" type="submit">
-            <span class="icon">
-              <i class="far fa-arrow-alt-circle-right"></i>
-            </span>
-            <span>CONVERT</span>
-          </button>
-        </form>
+        <div id="image-content" class="tabcontent">
+          <h5>IMAGES CONTENT</h5>
+        </div>
       </div>
     </div>
 

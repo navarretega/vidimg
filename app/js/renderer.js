@@ -1,4 +1,5 @@
 // ** Imports ** //
+
 const path = require("path");
 const os = require("os");
 const fs = require("fs");
@@ -8,6 +9,11 @@ const { exec } = require("child_process");
 const { shell } = require("electron");
 
 // ** Variables ** //
+
+const videoTabEle = document.getElementById("video-tab");
+const imageTabEle = document.getElementById("image-tab");
+const videoContentEle = document.getElementById("video-content");
+const imageContentEle = document.getElementById("image-content");
 const formEle = document.getElementById("vidimg-form");
 const videoEle = document.getElementById("video");
 const startEle = document.getElementById("start-time");
@@ -169,3 +175,21 @@ videoEle.addEventListener("change", onChange);
 
 // Handle Submit
 formEle.addEventListener("submit", (e) => onSubmit(e));
+
+// Tab Events
+videoTabEle.addEventListener("click", () => {
+  if (!videoContentEle.classList.contains("active")) {
+    imageContentEle.classList.remove("active");
+    imageTabEle.classList.remove("tl-active");
+    videoContentEle.classList.add("active");
+    videoTabEle.classList.add("tl-active");
+  }
+});
+imageTabEle.addEventListener("click", () => {
+  if (!imageContentEle.classList.contains("active")) {
+    videoContentEle.classList.remove("active");
+    videoTabEle.classList.remove("tl-active");
+    imageContentEle.classList.add("active");
+    imageTabEle.classList.add("tl-active");
+  }
+});
