@@ -104,7 +104,7 @@ body {
   background-color: #eff8e2;
 }
 
-#submit-btn {
+.custom-btn {
   background-color: #eff8e2;
 }
 
@@ -112,11 +112,13 @@ body {
   color: #eff8e2;
 }
 
-#fps {
+#fps,
+#images-fps {
   width: 15%;
 }
 
-#spinner-container {
+#spinner-container,
+#spinner-img-container {
   position: absolute;
   width: 100%;
 }

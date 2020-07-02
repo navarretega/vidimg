@@ -115,7 +115,6 @@
             <p class="loading-path"></p>
           </div>
           <!-- Loading -->
-
           <form action="" id="vidimg-form" class="toggle-content is-visible">
             <div class="f">
               <label class="label custom">1. Start by choosing a video.</label>
@@ -218,7 +217,7 @@
               <p class="help">FPS</p>
             </div>
 
-            <button id="submit-btn" class="button is-fullwidth" type="submit">
+            <button class="button is-fullwidth custom-btn" type="submit">
               <span class="icon">
                 <i class="far fa-arrow-alt-circle-right"></i>
               </span>
@@ -228,7 +227,71 @@
         </div>
 
         <div id="image-content" class="tabcontent">
-          <h5>IMAGES CONTENT</h5>
+          <!-- Loading -->
+          <div id="spinner-img-container" class="toggle-content">
+            <div class="spinner">
+              <div class="rect1"></div>
+              <div class="rect2"></div>
+              <div class="rect3"></div>
+              <div class="rect4"></div>
+              <div class="rect5"></div>
+            </div>
+            <p class="loading-path"></p>
+          </div>
+          <!-- Loading -->
+          <form action="" id="img-form" class="toggle-content is-visible">
+            <div class="f">
+              <label class="label custom">1. Select a directory.</label>
+              <p class="help">
+                Make sure your images are sorted alphabetically!<br />
+                For example: 0001-myimage.jpg, 0002-myimage.jpg,
+                0003-myimage.jpg, etc. Also, your images should have the same
+                aspect ratio!
+              </p>
+              <br />
+              <div class="file has-name">
+                <label class="file-label">
+                  <input
+                    class="file-input"
+                    type="file"
+                    name="resume"
+                    id="images-dir"
+                    webkitdirectory
+                    required
+                  />
+                  <span class="file-cta">
+                    <span class="file-icon">
+                      <i class="fas fa-upload"></i>
+                    </span>
+                    <span class="file-label">
+                      Choose
+                    </span>
+                  </span>
+                  <span id="images-dir-name" class="file-name">
+                    /home/alex/data/images/
+                  </span>
+                </label>
+              </div>
+            </div>
+            <div class="f">
+              <label class="label custom">2. Now set the frame rate.</label>
+              <input
+                class="input"
+                type="text"
+                placeholder="25"
+                id="images-fps"
+                required
+              />
+              <p class="help">FPS</p>
+            </div>
+
+            <button class="button is-fullwidth custom-btn" type="submit">
+              <span class="icon">
+                <i class="far fa-arrow-alt-circle-right"></i>
+              </span>
+              <span>CONVERT</span>
+            </button>
+          </form>
         </div>
       </div>
     </div>
