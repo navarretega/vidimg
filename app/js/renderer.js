@@ -6,9 +6,10 @@ const fs = require("fs");
 const moment = require("moment");
 const Swal = require("sweetalert2");
 const { exec } = require("child_process");
-const { shell } = require("electron");
 
 // ** Variables ** //
+
+dialog = remote.dialog;
 
 const videoTabEle = document.getElementById("video-tab");
 const imageTabEle = document.getElementById("image-tab");
@@ -37,9 +38,9 @@ let imagesPath;
 // ** Functions ** //
 
 // Run Shell Commands
-function execShellCommand(cmd) {
+function execShellCommand(cmd, options = {}) {
   return new Promise((resolve, reject) => {
-    exec(cmd, (error, stdout, stderr) => {
+    exec(cmd, options, (error, stdout, stderr) => {
       if (error) {
         resolve({ err: true, msg: error.message });
       }
@@ -56,7 +57,29 @@ function showAlert(icon, title, text, footer = "") {
     width: "80%",
     text: text,
     footer: footer,
+    heightAuto: false,
   });
+}
+
+// Add Folder Name
+function onClickFolder() {
+  let options = { properties: ["openDirectory"] };
+  dialog
+    .showOpenDialog(null, options)
+    .then((res) => {
+      if (res.canceled) return;
+      imagesPath = res.filePaths[0];
+      imagesDirNameEle.value = imagesPath;
+      imagesDirNameEle.innerText = imagesPath;
+      imagesDirNameEle.setAttribute("title", imagesPath);
+    })
+    .catch((e) => {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong! Please try again.",
+      });
+    });
 }
 
 // Handle Video Input Event
@@ -159,20 +182,13 @@ async function onSubmit(e) {
     // Verify result
     if (res["err"]) {
       console.log(res["err"]);
-      showAlert("error", "Sorry!", "Something bad happen.");
+      showAlert("error", "Sorry!", "Something bad happened.");
     } else {
-      showAlert(
-        "success",
-        "Your images are ready!",
-        `You can find them here: ${outputPath}`
-      );
-
-      // Reset animation
-      spinner.classList.remove("is-visible");
-      formEle.classList.add("is-visible");
-
-      // shell.openPath(outputPath)
+      showAlert("success", "Your images are ready!", `You can find them here: ${outputPath}`);
     }
+    // Reset animation
+    spinner.classList.remove("is-visible");
+    formEle.classList.add("is-visible");
   }
 }
 
@@ -206,6 +222,12 @@ function setImageInput() {
 // Handle Submit Form Event - Images
 async function onImageSubmit(e) {
   e.preventDefault();
+
+  if (!imagesPath) {
+    showAlert("info", "", "Select a valid directory");
+    return;
+  }
+
   const res = await execShellCommand("ffmpeg -version");
   if (res["err"]) {
     showAlert(
@@ -224,6 +246,13 @@ async function onImageSubmit(e) {
     }
 
     // Prepare ffmpeg command with the given inputs
+    // process.platform == "win32"
+
+    let options = {};
+    if (process.platform == "win32") {
+      options = { shell: "C:\\Program Files\\Git\\bin\\bash.exe" };
+    }
+
     const cmd = `cat "${imagesPath}/"*.{png,jpg} | ffmpeg -f image2pipe -framerate ${imagesFpsEle.value} -i - "${out}"`;
     console.log(cmd);
 
@@ -232,26 +261,19 @@ async function onImageSubmit(e) {
     imgSpinner.classList.add("is-visible");
 
     // Run ffmpeg command
-    const res = await execShellCommand(cmd);
+    const res = await execShellCommand(cmd, options);
     // await new Promise((resolve) => setTimeout(resolve, 5000));
 
     // Verify result
     if (res["err"]) {
       console.log(res);
-      showAlert("error", "Sorry!", "Something bad happen.");
+      showAlert("error", "Sorry!", "Something bad happened.");
     } else {
-      showAlert(
-        "success",
-        "Your video is ready!",
-        `You can find it here: ${out}`
-      );
-
-      // Reset animation
-      imgSpinner.classList.remove("is-visible");
-      imagesFormEle.classList.add("is-visible");
-
-      // shell.openPath(outputPath)
+      showAlert("success", "Your video is ready!", `You can find it here: ${out}`);
     }
+    // Reset animation
+    imgSpinner.classList.remove("is-visible");
+    imagesFormEle.classList.add("is-visible");
   }
 }
 
@@ -268,7 +290,8 @@ videoTabEle.addEventListener("click", videoTabSwitch);
 imageTabEle.addEventListener("click", imageTabSwitch);
 
 // Image Input
-imagesDirEle.addEventListener("change", setImageInput);
+// imagesDirEle.addEventListener("change", setImageInput);
+imagesDirEle.addEventListener("click", onClickFolder);
 
 // Handle Image Submit
 imagesFormEle.addEventListener("submit", (e) => onImageSubmit(e));

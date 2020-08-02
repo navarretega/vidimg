@@ -1,20 +1,25 @@
 {
   "name": "vidimg",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple ffmpeg GUI for converting videos to images and viceversa. Useful for object detection applications.",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "dev": "nodemon --exec electron ."
+    "dev": "nodemon --exec electron .",
+    "dist": "electron-builder"
   },
-  "author": "",
+  "author": "brisai",
   "license": "ISC",
   "devDependencies": {
     "electron": "^9.0.5",
+    "electron-builder": "^22.8.0",
     "nodemon": "^2.0.4"
   },
   "dependencies": {
     "moment": "^2.27.0",
     "sweetalert2": "^9.15.2"
+  },
+  "build": {
+    "appId": "brisai.vidimg"
   }
 }
